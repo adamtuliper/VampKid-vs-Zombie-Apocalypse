@@ -57,7 +57,7 @@ public class PortalController : MonoBehaviour
             {
                 //portal isn't activated yet! need to find the key
                 _displayedHelperMessage = true;
-                _gameController.ShowLevelDirections("Find the key to activate the portal!");
+                _gameController.ShowLevelMessage("Find the key to activate the portal!");
                 //Show helper message
             }
         }

@@ -5,7 +5,7 @@ using System;
 public class ZombieController : MonoBehaviour
 {
 
-    private int _health = 60;
+    private int _health = 3;
     private bool _isDead = false;
     private Animator _animator;
     private GameController _gameController;
@@ -26,19 +26,29 @@ public class ZombieController : MonoBehaviour
 
         //play 'hit' animation.
         _animator.SetTrigger("GotHit");
-        _health -= 10;
+        _health -= 1;
+        if (_health <= 0)
+        {
+            KillZombie();
+        }
+    }
 
+    public void KillZombie()
+    {
+        _isDead = true;
         //if health<=0, state is dead and play 'die'
         _animator.SetBool("Die", true);
         GetComponent<CircleCollider2D>().enabled = false;
+        GetComponent<BoxCollider2D>().enabled = false;
+
+        //Prevent detecting any collisions now - he's dead jim.
         GetComponent<Rigidbody2D>().isKinematic = true;
         StartCoroutine(FadeAway());
-        //Increase the score
     }
-
 
     IEnumerator FadeAway()
     {
+        yield return new WaitForSeconds(1);
         _spriteRenderer = GetComponent<SpriteRenderer>();
         while (_spriteRenderer.color.a > 0)
         {

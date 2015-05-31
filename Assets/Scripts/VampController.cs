@@ -7,22 +7,19 @@ public class VampController : MonoBehaviour
     private Animator _animator;
 
     private int health;
-    //sprivate bool _jump;
-    //private bool _fire;
     private bool _grounded;
     private bool _dead;
     private GameController _gameController;
 
     [SerializeField]
-    private GameObject _weapon;
+    private GameObject _batBurst;
+
     // Use this for initialization
     void Start()
     {
-
         _rigidBody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
 
-       
         _gameController = GameController.GetGameControllerInScene();
 
     }
@@ -42,6 +39,7 @@ public class VampController : MonoBehaviour
             //3. we can apply an edge collider to top of world
             //4. we can only jump when grounded
             //if (transform.position.y < 40)
+            Debug.Log("Jumping..? Grounded:" + _grounded);
             if (_grounded)
             {
                 _rigidBody.AddForce(new Vector2(0, 1200));
@@ -66,30 +64,6 @@ public class VampController : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collider)
-    {
-
-        //Did we fall off the world?
-        if (collider.gameObject.tag == "Border")
-        {
-            StartCoroutine(CoVampireDie());
-            _dead = true;
-        }
-
-        if (collider.gameObject.tag == "Zombie")
-        {
-            //What to do when we hit the zombie?
-        }
-    }
-    
-
-    IEnumerator CoVampireDie()
-    {
-        yield return new WaitForSeconds(2);
-
-        _rigidBody.isKinematic = true;
-        _gameController.PlayerDied();
-    }
 
     void FixedUpdate()
     {
@@ -120,7 +94,7 @@ public class VampController : MonoBehaviour
 
 
         transform.localScale = localScale;
-       
+
         if (horizontal != 0)
         {
             _animator.SetBool("Run", true);
@@ -144,5 +118,46 @@ public class VampController : MonoBehaviour
 
         }
 
+    }
+
+    /// <summary>
+    /// I decided to use a trigger AND a collider for two reasons - and thats on the  ZOMBIE.
+    /// The circle collider gives a nice movement across a surface, doesn't catch
+    /// as many edges as a box collider would. So the CircleCollider2D on the zombie uses that
+    /// An OnTriggerEnter2D will get called on both objects that get hit, so I'm only detecting
+    /// if we run into a zombie from the player, as that's a game ending experience.
+    /// 
+    /// The circle collider if it was the size of the zombie is pretty big and causes collisions with our 
+    /// rocket to happen outside our actual Zombie - they look weird. Now, with using a BoxCollider2D on the 
+    /// zombie as our hit detection region, we can have a more realistic looking collision in a better boxy area
+    /// since when we used the circle it was a lot bigger than our zombie's trim shape. IF it was a fat zombie
+    /// it may have worked :)
+    /// </summary>
+    /// <param name="collision"></param>
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "zombie")
+        {
+            //What to do when we hit the zombie? We die!
+
+            //Disable our physics
+            _rigidBody.isKinematic = true;
+
+            //Disable the vamp image
+            GetComponent<SpriteRenderer>().enabled = false;
+
+            //Enable the explosion particle effects. 
+            _batBurst.SetActive(true);
+
+            //While we're at it, let's kill the zombie we just hit :)
+            //Fixes the silly issue of having the zombies have a 
+            //rigidbody and a collider and they get pushed when we hit them.
+            //We can get the zombie from collision.gameObject, then we just need its ZombieController.
+            collision.gameObject.GetComponent<ZombieController>().KillZombie();
+
+            //Tell the game controller we are all gone, let it decide what to do next.
+            _gameController.PlayerDied();
+
+        }
     }
 }

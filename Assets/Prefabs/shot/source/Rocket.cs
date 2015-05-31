@@ -23,7 +23,7 @@ public class Rocket : MonoBehaviour
             multiplerForRotation = 1;
         }
         //set its velocity every frame until we hit something
-        _rigidbody.velocity = new Vector2(multiplerForRotation*20, 0);
+        _rigidbody.velocity = new Vector2(multiplerForRotation*30, 0);
     }
 
    

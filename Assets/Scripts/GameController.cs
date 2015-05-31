@@ -16,7 +16,21 @@ public class GameController : MonoBehaviour {
     public PortalController PortalControllerFromCrypt;
     public void PlayerDied()
 	{
-	}
+        ShowLevelMessage("You died! Restarting....");
+        StartCoroutine(ReloadLevel());
+    }
+
+    /// <summary>
+    /// Coroutines (those with IEnumerator) must be started via StartCoroutine()
+    /// We can do things like pausee for a time in them. In this case, pause for two seconds
+    /// and reload the current level
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator ReloadLevel()
+    {
+        yield return new WaitForSeconds(2);
+        Application.LoadLevel(Application.loadedLevel);
+    }
 
     void Start()
     {
@@ -77,7 +91,7 @@ public class GameController : MonoBehaviour {
         _pointsText.text = _points.ToString() + " PTS";
     }
 
-    public void ShowLevelDirections(string message)
+    public void ShowLevelMessage(string message)
     {
         _levelDirectionsText.text = message;
 

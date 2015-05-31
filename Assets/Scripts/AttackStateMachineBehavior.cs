@@ -19,7 +19,7 @@ public class AttackStateMachineBehavior : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         //   var bip = animator.GetAnimatorTransitionInfo(layerIndex);
-        if (stateInfo.normalizedTime > .5 && !_launchedProjectile)
+        if (stateInfo.normalizedTime > .1 && !_launchedProjectile)
         {
             var projectilePosition = animator.rootPosition;
 
@@ -50,7 +50,7 @@ public class AttackStateMachineBehavior : StateMachineBehaviour
                 //Vampire is looking left (default character orientation)
                 projectilePosition.x -= 2.5f;
                 projectilePosition.y -= .75f;
-                var projectile = Instantiate(particle, projectilePosition, Quaternion.identity) as GameObject;
+                Instantiate(particle, projectilePosition, Quaternion.identity);
             }
            
             _launchedProjectile = true;
