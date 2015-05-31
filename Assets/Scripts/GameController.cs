@@ -83,10 +83,11 @@ public class GameController : MonoBehaviour {
 
         //ensure we've enabled this textbox since it may be 
         //disabled in the scene view so as to not obstruct the view
-        _levelDirectionsText.transform.parent.gameObject.SetActive(true);
+        _levelDirectionsText.transform.gameObject.SetActive(true);
         //Make the text visible
         var color = _levelDirectionsText.color;
         color.a = 1;
+        _levelDirectionsText.color = color;
 
         //Start fading it out
         _levelDirectionsText.CrossFadeAlpha(0, 5f, false);

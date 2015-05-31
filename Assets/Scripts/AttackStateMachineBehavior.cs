@@ -24,17 +24,33 @@ public class AttackStateMachineBehavior : StateMachineBehaviour
             var projectilePosition = animator.rootPosition;
 
             //Move the projectile over just a bit when creating it.
-            projectilePosition.x += 2.5f;
-            projectilePosition.y -= .75f;
-            var projectile = Instantiate(particle, projectilePosition, Quaternion.identity) as GameObject;
+          
+           
 
             //See if we should flip it to the right or left
             //Setting a scale to -1 in the x flips the object (same as rotating by 180 degrees)
             if (animator.gameObject.transform.localScale.x == -1)
             {
-                var temp = ((GameObject)projectile).transform.localScale;
+                //Vampire is looking right (opposite of default orientation)
+                projectilePosition.x += 2.5f;
+                projectilePosition.y -= .75f;
+                var projectile = Instantiate(particle, projectilePosition, Quaternion.identity) as GameObject;
+                var temp = projectile.transform.localScale;
                 temp.x = -1;
-                ((GameObject)projectile).transform.localScale = temp; ;
+                projectile.transform.localScale = temp;
+
+                //flip the particle system's game object by 180
+                var particleSystem = projectile.GetComponentInChildren<ParticleSystem>();
+                //Rotation is stored as a quaternion, get a eulerAngle (ie degrees)
+                particleSystem.transform.localRotation = Quaternion.Euler( new Vector3(0, 270, -90));
+               
+            }
+            else
+            {
+                //Vampire is looking left (default character orientation)
+                projectilePosition.x -= 2.5f;
+                projectilePosition.y -= .75f;
+                var projectile = Instantiate(particle, projectilePosition, Quaternion.identity) as GameObject;
             }
            
             _launchedProjectile = true;

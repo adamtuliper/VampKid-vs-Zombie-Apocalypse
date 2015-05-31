@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class YetiController : MonoBehaviour
+public class VampController : MonoBehaviour
 {
     private Rigidbody2D _rigidBody;
     private Animator _animator;
@@ -56,24 +56,13 @@ public class YetiController : MonoBehaviour
             //Edit/Project Settings/Input shows jump default is spacebar
             //_fire = Input.GetButtonDown("Fire1");
             _animator.SetTrigger("Attack");
-            //If we are scaled to 1, ensure we fly to left.
-            //if we are scaled to -1, we are now facing right, ensure projectile goes to right.
-            //var projectilePosition = transform.position;
 
-            ////Move the projectile over just a bit when creating it.
-            //projectilePosition.x += 2f;
-            //projectilePosition.y -= .75f;
-
+            //Note that we could instantiate the projectile here, thats 
+            //common when we shoot things out in Unity
             //var projectile = Instantiate(_weapon, projectilePosition, Quaternion.identity);
-            
-            ////Make our projectile fit the scale (ie rotation since we're changing scale to -1 to 
-            ////rotate our object) we have
-            //if (transform.localScale.x == -1)
-            //{
-            //    var temp = ((GameObject)projectile).transform.localScale;
-            //    temp.x = -1;
-            //    ((GameObject)projectile).transform.localScale = temp;;
-            //}
+            //However, I'm using a feature of Unity 5 called a StateMachineBehavior and instead
+            //calling code (in /Scripts/AttackStateMachineBehavior) from the vamp_run state 
+            //on the vampire's animation controller.
         }
     }
 
