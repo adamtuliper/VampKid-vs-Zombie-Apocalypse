@@ -67,34 +67,32 @@ public class VampController : MonoBehaviour
 
     void FixedUpdate()
     {
-
-
         if (_dead)
         {
             return;
         }
 
-
+        //Read the left/right input
         var horizontal = Input.GetAxis("Horizontal");
+
+        //If we're moving to the right, we've flipped this character by setting localScale=-1
         var localScale = transform.localScale;
 
-        //flips the character left if the input is < 0 and, right if >0 
+        //Flips the character left if the input is < 0 and, right if >0 
         if (horizontal < 0)
         {
-            //transform.rotation.y=180;
-            //transform.localScale = -1;
-            localScale.x = 1;
             // localScale is a Vector 3, which means it contains x,y,z
+            localScale.x = 1;
         }
         else if (horizontal > 0f)
         {
-            //transform.localScale = 0;
             localScale.x = -1;
         }
 
 
         transform.localScale = localScale;
 
+        //If we're moving left or right, play the run animation
         if (horizontal != 0)
         {
             _animator.SetBool("Run", true);
@@ -104,24 +102,26 @@ public class VampController : MonoBehaviour
             _animator.SetBool("Run", false);
         }
 
+        //Move the actual object by setting its velocity
         _rigidBody.velocity = new Vector2(horizontal * 20, _rigidBody.velocity.y);
-
-
     }
 
+    //Called when something hits this object that also has a collider on it
+    //that is not set as a trigger. I use this to detect if we've come in contact
+    //with a platform. 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        //Ensure all of your platforms have a tag of "platform"
+        //otherwise we don't detect the landing.
         if (collision.gameObject.tag == "platform")
         {
             _grounded = true;
             _animator.SetBool("Grounded", true);
-
         }
-
     }
 
     /// <summary>
-    /// I decided to use a trigger AND a collider for two reasons - and thats on the  ZOMBIE.
+    /// Use a trigger AND a collider for two reasons on the ZOMBIE.
     /// The circle collider gives a nice movement across a surface, doesn't catch
     /// as many edges as a box collider would. So the CircleCollider2D on the zombie uses that
     /// An OnTriggerEnter2D will get called on both objects that get hit, so I'm only detecting
@@ -149,6 +149,9 @@ public class VampController : MonoBehaviour
             //Enable the explosion particle effects. 
             _batBurst.SetActive(true);
 
+            //He's dead Jim.
+            _dead = true;
+
             //While we're at it, let's kill the zombie we just hit :)
             //Fixes the silly issue of having the zombies have a 
             //rigidbody and a collider and they get pushed when we hit them.
@@ -157,6 +160,8 @@ public class VampController : MonoBehaviour
 
             //Tell the game controller we are all gone, let it decide what to do next.
             _gameController.PlayerDied();
+
+            //TODO: Shake the camera a bit on hit
 
         }
     }

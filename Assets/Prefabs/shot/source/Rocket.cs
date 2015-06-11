@@ -9,6 +9,7 @@ public class Rocket : MonoBehaviour
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        Destroy(gameObject, 5f);
     }
 
 

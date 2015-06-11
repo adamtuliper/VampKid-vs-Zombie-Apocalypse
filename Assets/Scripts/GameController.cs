@@ -8,9 +8,9 @@ public class GameController : MonoBehaviour {
     private int _coinScore;
     private int _points;
 
-    public Text _pointsText;
-    public Text _coinScoreText;
-    public Text _levelDirectionsText;
+    public Text PointsText;
+    public Text CoinScoreText;
+    public Text LevelMessageText;
     public string LevelNameToLoad;
 
     public PortalController PortalControllerFromCrypt;
@@ -34,11 +34,13 @@ public class GameController : MonoBehaviour {
 
     void Start()
     {
+      
+
         //Sanity checks
 
-        if (_pointsText == null) Debug.LogError("PointsText hasn't been set to a Text element in your scene yet. We can't update screen text without this.");
-        if (_coinScoreText == null) Debug.LogError("CoinScoreText hasn't been set to a Text element in your scene yet. We can't update coin counter text without this.");
-        if (_levelDirectionsText == null) Debug.LogError("LevelDirectionsText hasn't been set to a Text element in your scene yet. We can't update screen dialog text without this.");
+        if (PointsText == null) Debug.LogError("PointsText hasn't been set to a Text element in your scene yet. We can't update screen text without this.");
+        if (CoinScoreText == null) Debug.LogError("CoinScoreText hasn't been set to a Text element in your scene yet. We can't update coin counter text without this.");
+        if (LevelMessageText == null) Debug.LogError("LevelMessageText hasn't been set to a Text element in your scene yet. We can't update screen dialog text without this.");
 
         if (string.IsNullOrEmpty(LevelNameToLoad))
         {
@@ -82,28 +84,28 @@ public class GameController : MonoBehaviour {
     public void IncrementCoinScore(int amount)
     {
         _coinScore += amount;
-        _coinScoreText.text = _coinScore.ToString();
+        CoinScoreText.text = _coinScore.ToString();
     }
 
     public void IncrementPoints(int amount)
     {
         _points += amount;
-        _pointsText.text = _points.ToString() + " PTS";
+        PointsText.text = _points.ToString() + " PTS";
     }
 
     public void ShowLevelMessage(string message)
     {
-        _levelDirectionsText.text = message;
+        LevelMessageText.text = message;
 
         //ensure we've enabled this textbox since it may be 
         //disabled in the scene view so as to not obstruct the view
-        _levelDirectionsText.transform.gameObject.SetActive(true);
+        LevelMessageText.transform.gameObject.SetActive(true);
         //Make the text visible
-        var color = _levelDirectionsText.color;
+        var color = LevelMessageText.color;
         color.a = 1;
-        _levelDirectionsText.color = color;
+        LevelMessageText.color = color;
 
         //Start fading it out
-        _levelDirectionsText.CrossFadeAlpha(0, 5f, false);
+        LevelMessageText.CrossFadeAlpha(0, 5f, false);
     }
 }
