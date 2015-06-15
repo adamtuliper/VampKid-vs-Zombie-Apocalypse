@@ -136,9 +136,10 @@ public class ZombieController : MonoBehaviour
         //Check for the main playeer. We are using a layer mask to ONLY look for objects assigned to layer 8 (the Player Layer)
         //that was custom defined in the Layers dropdown. You can see an example of this here: http://docs.unity3d.com/Manual/Layers.html
         //This is a bit mask saying layer 8 is set ex a byte has 8 values 00000000 and 1<<8 becomes 10000000.
-        var hitLeft = Physics2D.RaycastAll(transform.position, Vector2.left, Mathf.Infinity, (1 << 8));
+        //The player is the only object on this layer, hence the only thing we'll hit.
+        var hitLeft = Physics2D.Raycast(transform.position, Vector2.left, Mathf.Infinity, (1 << 8));
 
-        if (CheckForPlayerHit(hitLeft))
+        if (hitLeft.collider != null)
         {
             //A player was found to the left of us
 
@@ -169,8 +170,8 @@ public class ZombieController : MonoBehaviour
         else
         {
             //Didn't find on the left, now check the right
-            var hitRight = Physics2D.RaycastAll(transform.position, Vector2.right, Mathf.Infinity, (1 << 8));
-            if (CheckForPlayerHit(hitRight))
+            var hitRight = Physics2D.Raycast(transform.position, Vector2.right, Mathf.Infinity, (1 << 8));
+            if (hitRight.collider != null)
             {
                 //Found player to the right
 
@@ -194,7 +195,7 @@ public class ZombieController : MonoBehaviour
         else
         {
             //We didn't find the player. If it's been < 2 seconds since we've seen the player, pretend we still see him.
-            if (_playerSpottedTime != DateTime.MinValue && 
+            if (_playerSpottedTime != DateTime.MinValue &&
                     DateTime.Now.Subtract(_playerSpottedTime).TotalSeconds < 2)
             {
                 foundPlayer = true;
@@ -205,19 +206,5 @@ public class ZombieController : MonoBehaviour
 
         _animator.SetBool("Walk", foundPlayer);
     }
-
-    //See if we've hit the player with any of the Raycast hit info
-    private bool CheckForPlayerHit(RaycastHit2D[] hitLeft)
-    {
-        if (hitLeft == null) return false;
-        if (hitLeft.Length == -1) return false;
-
-        for (int i = 0; i < hitLeft.Length; i++)
-        {
-            var item = hitLeft[i];
-            if (item.transform.gameObject.tag == "Player") return true;
-        }
-
-        return false;
-    }
+    
 }

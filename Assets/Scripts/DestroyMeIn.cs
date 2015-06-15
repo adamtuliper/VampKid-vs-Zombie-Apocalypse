@@ -10,5 +10,4 @@ public class DestroyMeIn : MonoBehaviour
         //Destroy us in this many seconds
 	    Destroy(gameObject, Lifetime);
 	}
-	
 }

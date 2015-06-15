@@ -146,7 +146,7 @@ public class VampController : MonoBehaviour
             //Disable the vamp image
             GetComponent<SpriteRenderer>().enabled = false;
 
-            //Enable the explosion particle effects. 
+            //Enable bat particles here
             _batBurst.SetActive(true);
 
             //He's dead Jim.
