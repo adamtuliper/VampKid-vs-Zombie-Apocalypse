@@ -799,7 +799,7 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 22.5, y: -18.8999996}
+  m_AnchoredPosition: {x: 22.5, y: -17}
   m_SizeDelta: {x: 31.2000008, y: 31}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &328544126
@@ -1537,9 +1537,43 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 11449112, guid: 2b7f18d00efaf314487a51af40d43bb7, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5877684, guid: 2b7f18d00efaf314487a51af40d43bb7, type: 2}
+      propertyPath: m_Radius
+      value: 1.98000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 5877684, guid: 2b7f18d00efaf314487a51af40d43bb7, type: 2}
+      propertyPath: m_Offset.y
+      value: -1.40999997
+      objectReference: {fileID: 0}
+    - target: {fileID: 5877684, guid: 2b7f18d00efaf314487a51af40d43bb7, type: 2}
+      propertyPath: m_Offset.x
+      value: .150000006
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 11449112, guid: 2b7f18d00efaf314487a51af40d43bb7, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 2b7f18d00efaf314487a51af40d43bb7, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &841024266 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 142704, guid: 2b7f18d00efaf314487a51af40d43bb7, type: 2}
+  m_PrefabInternal: {fileID: 841024265}
+--- !u!61 &841024267
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 841024266}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: .189999998, y: .839999974}
+  serializedVersion: 2
+  m_Size: {x: 3.91000009, y: 4.75}
 --- !u!1001 &853089171
 Prefab:
   m_ObjectHideFlags: 0
@@ -1986,33 +2020,6 @@ MonoScript:
   m_Namespace: UnityEngine.UI
   m_AssemblyName: UnityEngine.UI.dll
   m_IsEditorScript: 0
---- !u!1 &1204005365
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1204005366}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1204005366
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1204005365}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.316782, y: -2.30743098, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 12
 --- !u!1 &1262950269
 GameObject:
   m_ObjectHideFlags: 0
@@ -2701,7 +2708,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 70.3000031, y: -16.7999992}
+  m_AnchoredPosition: {x: 68.5999985, y: -17.6720009}
   m_SizeDelta: {x: 155.751526, y: 45.3279419}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1842177097
@@ -3177,9 +3184,9 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: .497000009
+  m_ReferenceResolution: {x: 800, y: 450}
+  m_ScreenMatchMode: 1
+  m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
