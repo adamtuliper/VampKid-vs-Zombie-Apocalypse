@@ -8,7 +8,7 @@ public class ZombieController : MonoBehaviour
 {
     //This attribute allows a private variable to be 
     //visible in the Editor
-    [SerialzeField]
+    [SerializeField]
     private int _health = 3;
     private bool _isDead;
     private bool _isReadyToMove;

@@ -8,6 +8,7 @@ TagManager:
   - platform
   - zombie
   - rocket
+  - Border
   layers:
   - Default
   - TransparentFX
@@ -47,7 +48,7 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 1466819915
-    locked: 0
+    locked: 1
   - name: Level
     uniqueID: 4180097305
     locked: 0

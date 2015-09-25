@@ -9,15 +9,25 @@ public class CameraFollow : MonoBehaviour
     public float ySmooth = 8f;		// How smoothly the camera catches up with it's target movement in the y axis.
     public Vector2 maxXAndY;		// The maximum x and y coordinates the camera can have.
     public Vector2 minXAndY;		// The minimum x and y coordinates the camera can have.
+    public float leftBounds = -52f;
+    public float rightBounds = 62f;
 
 
     private Transform player;		// Reference to the player's transform.
-
+    private float minX;
+    private float maxX;
 
     void Awake()
     {
         // Setting up the reference.
+        //If you are just starting out in the lab, this won't yet be set (there is no player) and it will
+        //show an error inthe console window. Ignore that, it will resolve when you add the player to the scene.
         player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        float size = Camera.main.orthographicSize;
+        float aspect = (float)Screen.width/Screen.height;
+        minX = aspect*size + leftBounds;
+        maxX = rightBounds - aspect*size;
     }
 
 
@@ -47,6 +57,7 @@ public class CameraFollow : MonoBehaviour
         float targetX = transform.position.x;
         float targetY = transform.position.y;
 
+
         // If the player has moved beyond the x margin...
         if (CheckXMargin())
             // ... the target x coordinate should be a Lerp between the camera's current x position and the player's current x position.
@@ -58,7 +69,9 @@ public class CameraFollow : MonoBehaviour
             targetY = Mathf.Lerp(transform.position.y, player.position.y, ySmooth * Time.deltaTime);
 
         // The target x and y coordinates should not be larger than the maximum or smaller than the minimum.
+        //
         targetX = Mathf.Clamp(targetX, minXAndY.x, maxXAndY.x);
+        targetX = Mathf.Clamp(targetX, minX, maxX);
         targetY = Mathf.Clamp(targetY, minXAndY.y, maxXAndY.y);
 
         // Set the camera's position to the target position with the same z component.
