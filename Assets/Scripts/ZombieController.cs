@@ -83,6 +83,7 @@ public class ZombieController : MonoBehaviour
     }
     public void KillZombie()
     {
+        if (_isDead) return;
         _isDead = true;
         //if health<=0, state is dead and play 'die'
         _animator.SetBool("Die", true);

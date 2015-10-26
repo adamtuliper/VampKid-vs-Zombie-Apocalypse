@@ -712,7 +712,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 313042828}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.5, y: 5.9000001, z: -37.5}
+  m_LocalPosition: {x: -12, y: 6, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -733,10 +733,6 @@ MonoBehaviour:
   yMargin: 1
   xSmooth: 4
   ySmooth: 4
-  maxXAndY: {x: 22.3999996, y: 5.90999985}
-  minXAndY: {x: -12, y: 5.9000001}
-  leftBounds: -52
-  rightBounds: 62
 --- !u!1001 &322222884
 Prefab:
   m_ObjectHideFlags: 0
@@ -1115,8 +1111,8 @@ GameObject:
   - 4: {fileID: 608636729}
   - 68: {fileID: 608636728}
   m_Layer: 0
-  m_Name: Border (2)
-  m_TagString: Untagged
+  m_Name: BorderTop
+  m_TagString: BorderTop
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2131,8 +2127,8 @@ GameObject:
   - 4: {fileID: 1262950271}
   - 68: {fileID: 1262950270}
   m_Layer: 0
-  m_Name: Border
-  m_TagString: Untagged
+  m_Name: BorderLeft
+  m_TagString: BorderLeft
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2309,8 +2305,8 @@ GameObject:
   - 4: {fileID: 1416943696}
   - 68: {fileID: 1416943695}
   m_Layer: 0
-  m_Name: Border (1)
-  m_TagString: Untagged
+  m_Name: BorderRight
+  m_TagString: BorderRight
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

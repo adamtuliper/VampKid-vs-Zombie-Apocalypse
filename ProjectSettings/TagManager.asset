@@ -9,6 +9,9 @@ TagManager:
   - zombie
   - rocket
   - Border
+  - BorderLeft
+  - BorderRight
+  - BorderTop
   layers:
   - Default
   - TransparentFX
