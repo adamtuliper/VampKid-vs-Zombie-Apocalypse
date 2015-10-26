@@ -86,11 +86,17 @@ public class ZombieController : MonoBehaviour
         if (_isDead) return;
         _isDead = true;
         //if health<=0, state is dead and play 'die'
+        //The cleaner way here is to transition between states - ie Zombie.ChangeState(ZombieState.Dead)
+        //and that would be in charge of stopping other animations in progress, but this is a bit simpler for lab purposes.
         _animator.SetBool("Die", true);
+        _animator.SetBool("Walk", false);
+        _animator.SetBool("Idle", false);
+
+        //Zombie can no longer get hit, he's dead jim.
         GetComponent<CircleCollider2D>().enabled = false;
         GetComponent<BoxCollider2D>().enabled = false;
 
-        //Prevent detecting any collisions now - he's dead jim.
+        //Prevent detecting any collisions now - again, he's dead jim.
         GetComponent<Rigidbody2D>().isKinematic = true;
 
         //Kick off a separate task to fade the zombie away over two seconds
@@ -207,7 +213,17 @@ public class ZombieController : MonoBehaviour
             }
         }
 
-        _animator.SetBool("Walk", foundPlayer);
+        if (foundPlayer)
+        {
+            _animator.SetBool("Walk", true);
+            _animator.SetBool("Idle", false);
+        }
+        else
+        {
+            //Go idle, no player found
+            _animator.SetBool("Idle", true);
+            _animator.SetBool("Walk", false);
+        }
     }
     
 }
