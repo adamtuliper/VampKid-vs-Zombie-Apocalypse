@@ -33,6 +33,9 @@ ExportedObj/
 Icon?
 ehthumbs.db
 Thumbs.db
+#temp word stuff
+~*.tmp
+~*.docx
 
 # ============ #
 # Protected Assets #
