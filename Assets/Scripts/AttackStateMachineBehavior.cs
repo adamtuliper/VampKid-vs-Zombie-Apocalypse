@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEditor;
+using UnityEngine;
 
 public class AttackStateMachineBehavior : StateMachineBehaviour
 {
@@ -18,14 +20,14 @@ public class AttackStateMachineBehavior : StateMachineBehaviour
     }
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //   var bip = animator.GetAnimatorTransitionInfo(layerIndex);
+        if (!animator) EditorApplication.isPaused = true;
         if (stateInfo.normalizedTime > .1 && !_launchedProjectile)
         {
-            var projectilePosition = animator.rootPosition;
+            var projectilePosition = animator.gameObject.transform.position;// animator.rootPosition;
 
             //Move the projectile over just a bit when creating it.
-          
-           
+
+
 
             //See if we should flip it to the right or left
             //Setting a scale to -1 in the x flips the object (same as rotating by 180 degrees)
@@ -34,7 +36,18 @@ public class AttackStateMachineBehavior : StateMachineBehaviour
                 //Vampire is looking right (opposite of default orientation)
                 projectilePosition.x += 2.5f;
                 projectilePosition.y -= .75f;
-                var projectile = Instantiate(particle, projectilePosition, Quaternion.identity) as GameObject;
+
+                if (Math.Abs(animator.gameObject.transform.position.x) < .01)
+                {
+                    EditorApplication.isPaused = true;
+                   Debug.LogError("Transforms don't match");
+                }
+                Debug.Log("Creating projectile at " + projectilePosition);
+
+
+                var projectile = (GameObject) Instantiate(particle, projectilePosition, Quaternion.identity);
+                Debug.Log("Creating projectile prefab " + projectile.GetHashCode() + " at " + projectilePosition);
+
                 var temp = projectile.transform.localScale;
                 temp.x = -1;
                 projectile.transform.localScale = temp;
@@ -47,12 +60,23 @@ public class AttackStateMachineBehavior : StateMachineBehaviour
             }
             else
             {
+
                 //Vampire is looking left (default character orientation)
                 projectilePosition.x -= 2.5f;
                 projectilePosition.y -= .75f;
-                Instantiate(particle, projectilePosition, Quaternion.identity);
+
+                if (Math.Abs(animator.gameObject.transform.position.x) < .01)
+                {
+                    EditorApplication.isPaused = true;
+                    Debug.LogError("Transforms don't match");
+                }
+
+                var go = (GameObject) Instantiate(particle, projectilePosition, Quaternion.identity);
+                
+                Debug.Log("Creating projectile prefab " + go.GetHashCode() + "at " + projectilePosition);
+
             }
-           
+
             _launchedProjectile = true;
         }
        // Debug.Log("OnStateUpdate:" + stateInfo.normalizedTime.ToString());

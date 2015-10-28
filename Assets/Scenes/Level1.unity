@@ -403,6 +403,8 @@ MonoBehaviour:
   CoinScoreText: {fileID: 1842177097}
   LevelMessageText: {fileID: 717316162}
   LevelNameToLoad: Level2
+  LevelTimer: {fileID: 730845373}
+  LevelLengthInSeconds: 30
   PortalControllerFromCrypt: {fileID: 1781600725}
 --- !u!4 &123827897
 Transform:
@@ -1463,7 +1465,7 @@ MonoBehaviour:
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: .565999985
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
 --- !u!222 &730845374
@@ -2546,33 +2548,6 @@ Transform:
   - {fileID: 2104401578}
   m_Father: {fileID: 0}
   m_RootOrder: 7
---- !u!1 &1616615136
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1616615137}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1616615137
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1616615136}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 54.7999992, y: 7.36446142, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
 --- !u!1 &1618446544
 GameObject:
   m_ObjectHideFlags: 0
