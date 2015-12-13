@@ -1,7 +1,10 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class Rocket : MonoBehaviour
 {
@@ -12,17 +15,21 @@ public class Rocket : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         Destroy(gameObject, 5f);
-        if (Math.Abs(gameObject.transform.position.x) < .01f) EditorApplication.isPaused = true;
+#if UNITY_EDITOR
+        if (Math.Abs(gameObject.transform.position.x) < .001f && Math.Abs(gameObject.transform.position.y) < .001f) EditorApplication.isPaused = true;
+#endif
     }
 
 
     void FixedUpdate()
     {
+#if UNITY_EDITOR
         if (Math.Abs(gameObject.transform.position.x) < .01f)
         {
             Debug.Log("Invalid projectile position found with hash:" + gameObject.GetHashCode());
             EditorApplication.isPaused = true;
         }
+#endif
         //This is used to determine if we apply velocity in -x or +x direction
         //depending on how we are instantiated. If we're instantiated with localScale.x==-1
         //then we need to move to the right

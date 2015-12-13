@@ -49,7 +49,6 @@ public class GameController : MonoBehaviour
             Debug.LogError("No scene name has been set to load. Set this in the Editor on the PortalController component on the Portal");
         }
 
-
         if (PortalControllerFromCrypt == null)
         {
             Debug.LogError("There's no PortalController reference drag/dropped into the hierarchy window for the GameController. We can't enable the portal (crypt) without this reference being set.");
