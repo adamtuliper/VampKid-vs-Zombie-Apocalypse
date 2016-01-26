@@ -12,7 +12,7 @@ public class VampController : MonoBehaviour
     private GameController _gameController;
 
     [SerializeField]
-    private GameObject _batBurst;
+    private GameObject _batBurst = null;
 
     // Use this for initialization
     void Start()

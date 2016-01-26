@@ -9,10 +9,10 @@ public class ButtonManager : MonoBehaviour
     private AsyncOperation _async;
 
     [SerializeField]
-    private Image _healthBarStatus;
+    private Image _healthBarStatus = null;
 
     [SerializeField]
-    private GameObject _healthBarRoot;
+    private GameObject _healthBarRoot = null;
 
     public void LoadLevel1()
     {

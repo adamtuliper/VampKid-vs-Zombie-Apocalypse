@@ -7,13 +7,13 @@ public class PortalController : MonoBehaviour
     private bool _portalActivated;
 
     [SerializeField]
-    private GameObject _lock;
+    private GameObject _lock = null;
 
     [SerializeField]
-    private GameObject _closedDoor;
+    private GameObject _closedDoor = null;
 
     [SerializeField]
-    private GameObject _openDoor;
+    private GameObject _openDoor = null;
 
     //Have we shown the user a helper message when they move over the portal?
     private bool _displayedHelperMessage;

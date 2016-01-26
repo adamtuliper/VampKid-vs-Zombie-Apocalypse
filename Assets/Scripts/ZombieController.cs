@@ -17,7 +17,7 @@ public class ZombieController : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     [SerializeField]
     //TODO: recycle/object pool these
-    private GameObject _hitPrefab;
+    private GameObject _hitPrefab = null;
 
     private Rigidbody2D _rigidBody;
 
