@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ButtonManager : MonoBehaviour
@@ -22,7 +23,8 @@ public class ButtonManager : MonoBehaviour
     IEnumerator StartGame()
     {
         _healthBarRoot.SetActive(true);
-        _async = Application.LoadLevelAsync("Level1");
+
+	    _async = SceneManager.LoadSceneAsync("Level1");
         while (!_async.isDone)
         {
             Debug.Log(_async.progress);
