@@ -6,7 +6,7 @@ public class VampController : MonoBehaviour
     private Rigidbody2D _rigidBody;
     private Animator _animator;
 
-    private int health;
+    //private int health;
     private bool _grounded;
     private bool _dead;
     private GameController _gameController;
