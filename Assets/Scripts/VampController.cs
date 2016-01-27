@@ -101,7 +101,7 @@ public class VampController : MonoBehaviour
         {
             _animator.SetBool("Run", false);
         }
-        var bip = Application.platform;
+        //var bip = Application.platform;
         //Move the actual object by setting its velocity
         _rigidBody.velocity = new Vector2(horizontal * 20, _rigidBody.velocity.y);
     }
