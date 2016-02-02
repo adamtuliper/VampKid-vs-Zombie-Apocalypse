@@ -6,13 +6,13 @@ public class VampController : MonoBehaviour
     private Rigidbody2D _rigidBody;
     private Animator _animator;
 
-    private int health;
+    //private int health;
     private bool _grounded;
     private bool _dead;
     private GameController _gameController;
 
     [SerializeField]
-    private GameObject _batBurst;
+    private GameObject _batBurst = null;
 
     // Use this for initialization
     void Start()
@@ -101,7 +101,7 @@ public class VampController : MonoBehaviour
         {
             _animator.SetBool("Run", false);
         }
-        var bip = Application.platform;
+        //var bip = Application.platform;
         //Move the actual object by setting its velocity
         _rigidBody.velocity = new Vector2(horizontal * 20, _rigidBody.velocity.y);
     }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ButtonManager : MonoBehaviour
@@ -8,10 +9,10 @@ public class ButtonManager : MonoBehaviour
     private AsyncOperation _async;
 
     [SerializeField]
-    private Image _healthBarStatus;
+    private Image _healthBarStatus = null;
 
     [SerializeField]
-    private GameObject _healthBarRoot;
+    private GameObject _healthBarRoot = null;
 
     public void LoadLevel1()
     {
@@ -22,7 +23,8 @@ public class ButtonManager : MonoBehaviour
     IEnumerator StartGame()
     {
         _healthBarRoot.SetActive(true);
-        _async = Application.LoadLevelAsync("Level1");
+
+	    _async = SceneManager.LoadSceneAsync("Level1");
         while (!_async.isDone)
         {
             Debug.Log(_async.progress);

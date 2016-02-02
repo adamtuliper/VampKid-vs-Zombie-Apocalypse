@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -33,7 +34,7 @@ public class GameController : MonoBehaviour
     IEnumerator ReloadLevel()
     {
         yield return new WaitForSeconds(2);
-        Application.LoadLevel(Application.loadedLevel);
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     void Start()
@@ -115,8 +116,7 @@ public void EnableExitPortal()
     {
 
         //TODO: display a 'success' sign, loading scene, etc.
-        Application.LoadLevel(LevelNameToLoad);
-
+		SceneManager.LoadScene(LevelNameToLoad);
     }
 
     public void IncrementCoinScore(int amount)
